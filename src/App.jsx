@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import './App.css'
-import { getImage } from './services/DalleAPI';
+import { getImageWithAxios, getImageWithFetch } from './services/DalleAPI';
 
 
 function App() {
@@ -10,8 +10,16 @@ function App() {
   const mounted = useRef(false);
   useEffect(() => {
     if (mounted.current) {
-      const res = getImage();
-      console.log(res)
+      var datos;
+      const fetchData = async () => {
+        datos = await getImageWithAxios();
+      };
+      fetchData();
+      /* const fetchData = async () => {
+        console.log(await getImage());
+        return await getImage();
+      }
+      var data = fetchData(); */
     } else {
       mounted.current = true;
     }
